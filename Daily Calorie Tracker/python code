@@ -1,0 +1,59 @@
+# Project: Daily Calorie Tracker CLI
+# Author: Ishan Savarna
+# Date: 10 OCTOBER 2025
+
+print("===================================")
+print("   Welcome to Daily Calorie Tracker ")
+print("===================================")
+print("This tool helps you log your meals, track total calories, and check against your daily calorie limit.\n")
+
+# Task 2: Input & Data Collection
+meals = []
+Calories = []
+
+meal_count = int(input("How many meals would you like to log today? "))
+
+for i in range(meal_count):
+    meal_name = input(f"Enter meal {i+1} name: ")
+    calorie = float(input(f"Enter calories for {meal_name}: "))
+    
+    meals.append(meal_name)
+    calories.append(calorie)
+
+#Task 3: Calorie Calculations
+total_calories = sum(calories)
+average_calories = total_calories / meal_count
+daily_limit = float(input("\nEnter your daily calorie limit: "))
+
+# Task 4: Exceed Limit Warning System 
+if total_calories > daily_limit:
+    status_message = " Warning: You have exceeded your daily calorie limit."
+else:
+    status_message = "You are within your daily calorie limit."
+
+#  Task 5: Neatly Formatted Output
+print("\n===== Daily Calorie Report =====")
+print("Meal Name\tCalories")
+print("-----------------------------------")
+for i in range(meal_count):
+    print(f"{meals[i]}\t\t{calories[i]}")
+print("-----------------------------------")
+print(f"Total:\t\t{total_calories}")
+print(f"Average:\t{average_calories:.2f}")
+print(status_message)
+
+# Task 6 (Bonus): Save Session Log
+save = input("\nDo you want to save this report in a file? (yes/no): ")
+
+if save == "yes":
+    with open("calorie_log.txt", "a") as file:
+        file.write("===== Daily Calorie Report =====\n")
+        file.write("Meal Name\tCalories\n")
+        file.write("-----------------------------------\n")
+        for i in range(meal_count):
+            file.write(f"{meals[i]}\t\t{calories[i]}\n")
+        file.write("-----------------------------------\n")
+        file.write(f"Total:\t\t{total_calories}\n")
+        file.write(f"Average:\t{average_calories:.2f}\n")
+        file.write(status_message + "\n\n")
+    print("The report is saved to calorie_log.txt")
